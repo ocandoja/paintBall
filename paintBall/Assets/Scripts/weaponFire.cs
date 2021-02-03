@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class weaponFire : MonoBehaviour
 {
-    public float damage = 1f;
+    public float damageAmount = 1f;
     public float range = 150;
     public Camera pCamera;
     // Update is called once per frame
@@ -21,6 +21,11 @@ public class weaponFire : MonoBehaviour
         if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
+            Target target = hit.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                target.damageReceived(damageAmount);
+            }
         }
     }
 }
